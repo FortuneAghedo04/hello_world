@@ -24,14 +24,14 @@ class _MainFoodState extends State<MainFood> {
   Widget build(BuildContext context) {
       Dimensions().init(context);
     // To get screen height of a device
-     print('screen height is'+ MediaQuery.of(context).size.height.toString());
+     print('screen height is${MediaQuery.of(context).size.height}');
     return Scaffold(
       body: ListView(
         children:[
           // App Bar Widget
-          AppBarWidget(),
+          const AppBarWidget(),
           // Search
-          Padding(padding:EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+          Padding(padding:const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
             child:Container(
               width:double.infinity,
               height:getProportionateScreenHeight(50),
@@ -43,52 +43,52 @@ class _MainFoodState extends State<MainFood> {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2.0,
                       blurRadius: 10.0,
-                      offset:Offset(0,3),
+                      offset:const Offset(0,3),
                     ),
                   ]
               ),
-              child: Padding(padding:EdgeInsets.symmetric(horizontal: 10.0),
+              child: Padding(padding:const EdgeInsets.symmetric(horizontal: 10.0),
                 child:Row(
                   mainAxisAlignment:MainAxisAlignment.spaceEvenly,
                   children: [
-                    Icon(CupertinoIcons.search,color:Colors.red),
-                    Container(
+                    const Icon(CupertinoIcons.search,color:Colors.red),
+                    SizedBox(
                       height: getProportionateScreenHeight(50),
                       width:getProportionateScreenWidth(300),
-                      child: Padding(padding: EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Padding(padding: const EdgeInsets.symmetric(horizontal: 15.0),
                         child: TextFormField(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText:'What would like to have',
                             border:InputBorder.none,
                           ),
                         ),
                       ),
                     ),
-                    Icon(Icons.filter_list),
+                    const Icon(Icons.filter_list),
                   ],
                 ),
               ),
             ),
           ),
           // CATEGORY OF FOODS
-          Padding(
+          const Padding(
               padding:EdgeInsets.only(top:20.0, left:10.0),
               child:Text('Categories',
                 style:TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),
               )
           ),
-          CategoriesWidget(),
+          const CategoriesWidget(),
           // POPULAR ITEMS
-          Padding(
+          const Padding(
               padding:EdgeInsets.only(top:20.0, left:10.0),
               child:Text('Popular',
                 style:TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),
               )
           ),
-          PopularItemWidget(),
+          const PopularItemWidget(),
         ],
       ),
-      drawer: DrawerWidget(),
+      drawer: const DrawerWidget(),
       floatingActionButton:Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
@@ -97,14 +97,14 @@ class _MainFoodState extends State<MainFood> {
                 color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 2.0,
                 blurRadius: 10.0,
-                offset: Offset(0,3),
+                offset: const Offset(0,3),
               ),
             ]),
         child: GestureDetector(
           onTap:CartPage,
           child: FloatingActionButton(
             onPressed: (){},
-            child: Icon(CupertinoIcons.cart,
+            child: const Icon(CupertinoIcons.cart,
               size: 24.0,
               color: Colors.red,
             ),

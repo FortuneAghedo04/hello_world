@@ -1,5 +1,4 @@
 import'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 class SignUp extends StatefulWidget {
   final VoidCallback showSignIn;
@@ -18,7 +17,7 @@ class _SignUpState extends State<SignUp> {
   String errormessage='';
   bool _obscureText=true;
  
-  Future SignUp() async{
+  Future Signup() async{
     setState((){
 
       errormessage='';
@@ -49,6 +48,7 @@ class _SignUpState extends State<SignUp> {
     }
   }
   // TO DESPOSE OF THE CONTROLLERS
+  @override
   void dispose(){
     emailController.dispose();
     passwordController.dispose();
@@ -59,7 +59,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration:BoxDecoration(
+      decoration:const BoxDecoration(
         image:DecorationImage(
           image:AssetImage('assets/login.jpg'),
           fit: BoxFit.cover,
@@ -75,8 +75,8 @@ class _SignUpState extends State<SignUp> {
                   child:Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Hello There',style:TextStyle(fontWeight:FontWeight.bold,fontSize: 45.0)),
-                      SizedBox(height:50.0),
+                      const Text('Hello There',style:TextStyle(fontWeight:FontWeight.bold,fontSize: 45.0)),
+                      const SizedBox(height:50.0),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal:23.0),
                         child: Container(
@@ -86,11 +86,11 @@ class _SignUpState extends State<SignUp> {
                             borderRadius: BorderRadius.circular(12.0),
                           ),
                           child:Padding(
-                            padding:EdgeInsets.only(left:20.0),
+                            padding:const EdgeInsets.only(left:20.0),
                             child:TextFormField(
                               validator: validateEmail,
                               controller: emailController,
-                              decoration:InputDecoration(
+                              decoration:const InputDecoration(
                                 border:InputBorder.none,
                                 hintText:'Email',
                               ),
@@ -98,7 +98,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                       ),
-                      SizedBox(height:10.0),
+                      const SizedBox(height:10.0),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal:23.0),
                         child: Container(
@@ -108,7 +108,7 @@ class _SignUpState extends State<SignUp> {
                             borderRadius: BorderRadius.circular(12.0),
                           ),
                           child:Padding(
-                            padding:EdgeInsets.only(left:20.0),
+                            padding:const EdgeInsets.only(left:20.0),
                             child:TextFormField(
                               validator: validatePassword,
                               obscureText:_obscureText,
@@ -130,7 +130,7 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                       ),
-                      SizedBox(height:10.0),
+                      const SizedBox(height:10.0),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal:23.0),
                         child: Container(
@@ -140,7 +140,7 @@ class _SignUpState extends State<SignUp> {
                             borderRadius: BorderRadius.circular(12.0),
                           ),
                           child:Padding(
-                            padding:EdgeInsets.only(left:20.0),
+                            padding:const EdgeInsets.only(left:20.0),
                             child:TextFormField(
                               validator: validatePassword,
                               controller: confirmpasswordController,
@@ -163,23 +163,23 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.all(12.0),
                         child: Center(
-                          child: Text(errormessage,style: TextStyle(color:Colors.red)),
+                          child: Text(errormessage,style: const TextStyle(color:Colors.red)),
                         ) ,
                       ),
 
-                      SizedBox(height: 15.0),
+                      const SizedBox(height: 15.0),
                       Padding(padding:const EdgeInsets.symmetric(horizontal: 25.0),
                         child: GestureDetector(
-                          onTap:SignUp,
+                          onTap:Signup,
                           child: Container(
-                            padding:EdgeInsets.all(20.0),
+                            padding:const EdgeInsets.all(20.0),
                             decoration: BoxDecoration(
                               color: Colors.deepPurpleAccent,
                               borderRadius: BorderRadius.circular(12.0),
                             ),
-                            child:Center(
+                            child:const Center(
 
                               child:Text('Sign Up',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 20.0)),
                             ),
@@ -187,15 +187,15 @@ class _SignUpState extends State<SignUp> {
                         ),
 
                       ),
-                      SizedBox(height: 25.0),
+                      const SizedBox(height: 25.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('I am a member', style: TextStyle(fontWeight: FontWeight.bold)),
-                          SizedBox(width: 5.0),
+                          const Text('I am a member', style: TextStyle(fontWeight: FontWeight.bold)),
+                          const SizedBox(width: 5.0),
                           GestureDetector(
                             onTap: widget.showSignIn,
-                              child:Text('Login  now',
+                              child:const Text('Login  now',
                                   style:TextStyle(color: Colors.blue,
                                       fontWeight: FontWeight.bold))
                           ),
@@ -212,21 +212,25 @@ class _SignUpState extends State<SignUp> {
   }
 }
  String? validateEmail(String? formemail){
-  if(formemail==null ||formemail.isEmpty)
+  if(formemail==null ||formemail.isEmpty) {
     return'E-mail address is required.';
+  }
   String pattern = r'\w+@\w+\.\w+';
   RegExp regex= RegExp(pattern);
-  if(!regex.hasMatch(formemail))
+  if(!regex.hasMatch(formemail)) {
     return'Invalid E-mail Address format.';
+  }
   return null;
  }
 String? validatePassword(String? formpass){
-  if(formpass==null || formpass.isEmpty)
+  if(formpass==null || formpass.isEmpty) {
     return'Password is required.';
+  }
   String pattern= r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
   RegExp regex= RegExp(pattern);
-  if(!regex.hasMatch(formpass))
+  if(!regex.hasMatch(formpass)) {
     return'''Password must be at least 8 characters,
         'include an uppercase letter, number and symbol.''';
+  }
   return null;
 }

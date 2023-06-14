@@ -11,8 +11,8 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   startTimer(){
-    Timer( Duration(seconds: 5), () async{
-      Navigator.push(context, MaterialPageRoute(builder:(c)=> MainPage()));
+    Timer( const Duration(seconds: 5), () async{
+      Navigator.push(context, MaterialPageRoute(builder:(c)=> const MainPage()));
 
     });
   }
@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               Image.asset('splash.png'),
               SizedBox(height: getProportionateScreenHeight(10.0)),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.all(18.0),
                 child: Text('Food made easy, just for you.',
                     textAlign:TextAlign.center,

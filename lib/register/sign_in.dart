@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 class SignIn extends StatefulWidget {
  // method to give to the gesture dectector, instance of a method
@@ -21,7 +20,7 @@ class _SignInState extends State<SignIn> {
 
   // CREATING THE SIGNIN FUNCTION
 
-  Future signIn() async{
+  Future signin() async{
     setState((){
 
       errormessage='';
@@ -40,6 +39,7 @@ class _SignInState extends State<SignIn> {
     }
   }
   // TO DESPOSE OF THE CONTROLLERS
+  @override
   void dispose(){
     emailController.dispose();
     passwordController.dispose();
@@ -48,7 +48,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration:BoxDecoration(
+      decoration:const BoxDecoration(
         image:DecorationImage(
           image:AssetImage('assets/login.jpg'),
           fit: BoxFit.cover,
@@ -64,8 +64,8 @@ class _SignInState extends State<SignIn> {
                 child:Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Hello Again!',style:TextStyle(fontWeight:FontWeight.bold,fontSize: 45.0)),
-                    SizedBox(height:50.0),
+                    const Text('Hello Again!',style:TextStyle(fontWeight:FontWeight.bold,fontSize: 45.0)),
+                    const SizedBox(height:50.0),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal:23.0),
                       child: Container(
@@ -75,11 +75,11 @@ class _SignInState extends State<SignIn> {
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                         child:Padding(
-                          padding:EdgeInsets.only(left:20.0),
+                          padding:const EdgeInsets.only(left:20.0),
                           child:TextFormField(
                             controller:emailController,
                             validator:validateEmail,
-                            decoration:InputDecoration(
+                            decoration:const InputDecoration(
                               border:InputBorder.none,
                               hintText:'Email',
 
@@ -89,7 +89,7 @@ class _SignInState extends State<SignIn> {
 
                       ),
                     ),
-                    SizedBox(height:10.0),
+                    const SizedBox(height:10.0),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal:23.0),
                       child: Container(
@@ -99,7 +99,7 @@ class _SignInState extends State<SignIn> {
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                         child:Padding(
-                          padding:EdgeInsets.only(left:20.0),
+                          padding:const EdgeInsets.only(left:20.0),
                           child:TextFormField(
                             controller: passwordController,
                             validator: validatepassword,
@@ -121,36 +121,36 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                     Padding(
-                        padding: EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.all(12.0),
                         child: Center(
-                          child: Text(errormessage,style: TextStyle(color:Colors.red)),
+                          child: Text(errormessage,style: const TextStyle(color:Colors.red)),
                         ),
                     ),
-                    SizedBox(height: 15.0),
+                    const SizedBox(height: 15.0),
                     Padding(padding:const EdgeInsets.symmetric(horizontal: 25.0),
                      child: GestureDetector(
-                       onTap: signIn,
+                       onTap: signin,
                        child: Container(
-                         padding:EdgeInsets.all(20.0),
+                         padding:const EdgeInsets.all(20.0),
                          decoration: BoxDecoration(
                            color: Colors.deepPurpleAccent,
                            borderRadius: BorderRadius.circular(12.0),
                          ),
-                         child:Center(
+                         child:const Center(
                           child:Text('Sign In',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 20.0)),
                          ),
                        ),
                      ),
                     ),
-                    SizedBox(height: 25.0),
+                    const SizedBox(height: 25.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Not a member?', style: TextStyle(fontWeight: FontWeight.bold)),
-                        SizedBox(width: 5.0),
+                        const Text('Not a member?', style: TextStyle(fontWeight: FontWeight.bold)),
+                        const SizedBox(width: 5.0),
                         GestureDetector(
                           onTap:widget.showSignUp,
-                            child:Text('Register now',
+                            child:const Text('Register now',
                                   style:TextStyle(
                                     color: Colors.blue,
                                     fontWeight: FontWeight.bold
@@ -170,21 +170,25 @@ class _SignInState extends State<SignIn> {
   }
 }
 String? validateEmail(String? formemail){
-  if(formemail==null || formemail.isEmpty)
+  if(formemail==null || formemail.isEmpty) {
     return 'E-mail address is required.';
+  }
   String pattern = r'\w+@\w+\.\w+';
   RegExp regex= RegExp(pattern);
-  if(!regex.hasMatch(formemail))
+  if(!regex.hasMatch(formemail)) {
     return'Invalid E-mail Address format.';
+  }
   return null;
 }
 String? validatepassword(String? formpass){
-  if(formpass==null || formpass.isEmpty)
+  if(formpass==null || formpass.isEmpty) {
     return 'Password is required.';
+  }
   String pattern= r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
   RegExp regex= RegExp(pattern);
-  if(!regex.hasMatch(formpass))
+  if(!regex.hasMatch(formpass)) {
     return'''Password must be at least 8 characters,
         'include an uppercase letter, number and symbol.''';
+  }
   return null;
 }
